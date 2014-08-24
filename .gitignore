@@ -1,0 +1,14 @@
+# Generated Folders/Files #
+/target/
+.classpath
+.settings/
+.project
+.springBeans
+
+# Class Files #
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear

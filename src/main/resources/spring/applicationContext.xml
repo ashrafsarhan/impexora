@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:component-scan base-package="com.impexora"></context:component-scan>
+
+	<!-- Load in application properties reference -->
+	<bean id="applicationSettings"
+		class="com.impexora.settings.ApplicationSettings">
+		<property name="location" value="classpath:application.properties" />
+	</bean>
+
+	<!-- <bean id="dataSource" -->
+	<!-- class="org.springframework.jdbc.datasource.DriverManagerDataSource"> -->
+
+	<!-- <property name="driverClassName" value="com.mysql.jdbc.Driver" /> -->
+	<!-- <property name="url" value="jdbc:mysql://10.68.20.135:3306/argo" /> -->
+	<!-- <property name="username" value="dev_user" /> -->
+	<!-- <property name="password" value="" /> -->
+	<!-- </bean> -->
+
+	<!-- <bean id="dbConnectionManager" class="com.arrow.ecommerce.navcatalogservice.commons.DbConnectionManager" 
+		autowire="byName"> -->
+	<!-- <property name="dataSource" ref="dataSource" /> -->
+	<!-- </bean> -->
+
+
+	<bean id="impexoraService"
+		class="com.impexora.service.ImpexoraServiceImpl" />
+
+	<bean id="impexoraWebService"
+		class="com.impexora.ws.ImpexoraWebService"
+		autowire="byName" />
+
+	<jaxrs:server id="impexoraWS" address="/impexora">
+		<jaxrs:serviceBeans>
+			<ref bean="impexoraWebService" />
+		</jaxrs:serviceBeans>
+	</jaxrs:server>
+
+</beans>
